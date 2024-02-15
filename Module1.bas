@@ -9,6 +9,12 @@ Sub stockdata()
         Dim i, j As Long
         Dim tickcount As Long
         Dim lastrow As Long
+        Dim newll As Long
+        Dim Perchange As Double
+        Dim greatvol As Double
+        Dim greatinc As Double
+        Dim greatdec As Double
+        
         
         
         'Header'
@@ -40,7 +46,8 @@ Sub stockdata()
                     Else:
                         ws.Cells(tickcount, 10).Interior.ColorIndex = 3
                     End If
-                ws.Cells(tickcount, 11).Value = Format((ws.Cells(i, 6) - ws.Cells(j, 3).Value) / ws.Cells(j, 3).Value, "percent")
+                Perchange = (ws.Cells(i, 6) - ws.Cells(j, 3).Value) / ws.Cells(j, 3).Value
+                ws.Cells(tickcount, 11).Value = Format(Perchange, "percent")
                 ws.Cells(tickcount, 12).Value = WorksheetFunction.Sum(Range(ws.Cells(j, 7), ws.Cells(i, 7)))
                 
                 tickcount = tickcount + 1
@@ -92,7 +99,7 @@ Sub stockdata()
                 
                 
                 If ws.Cells(i, 11).Value < greatdec Then
-                greatdec = Cells(i, 11).Value
+                greatdec = ws.Cells(i, 11).Value
                 ws.Cells(3, 16).Value = ws.Cells(i, 9).Value
                 
                 
